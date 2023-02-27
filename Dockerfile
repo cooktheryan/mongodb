@@ -11,6 +11,9 @@ RUN set -eux; \
 	mkdir -p /data/db /data/configdb; \
 	chown -R mongod:mongod /data/db /data/configdb
 
+RUN chmod -R 777  /data/db 
+RUN chmod -R 777  /data/configdb
+
 RUN dnf -y install npm jq mongodb-org && dnf localinstall -y http://rpmfind.net/linux/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-2.0.12-13.el8.x86_64.rpm https://rpmfind.net/linux/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-libs-2.0.12-13.el8.x86_64.rpm && dnf clean all && npm install mongodb && rm -rf /var/lib/mongo && mv /etc/mongod.conf /etc/mongod.conf.orig
 
 RUN mkdir /docker-entrypoint-initdb.d
